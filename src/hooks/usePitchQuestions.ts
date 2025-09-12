@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { supabase, PitchQuestion } from '@src/lib/supabase'
+import { supabase } from '@src/lib/supabase'
 
 interface UsePitchQuestionsReturn {
 	userName: string | null

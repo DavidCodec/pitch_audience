@@ -99,7 +99,7 @@ interface ListaSlideProps {
 export function ListaSlide({ items, className }: ListaSlideProps) {
 	return (
 		<ul className={cn('space-y-1 sm:space-y-2 md:space-y-3 h-full', className)}>
-			{items.map((item: any, index: any) => (
+			{items.map((item: string, index: number) => (
 				<motion.li
 					key={index}
 					initial={{ opacity: 0, x: -20 }}

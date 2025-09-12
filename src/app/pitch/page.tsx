@@ -103,7 +103,6 @@ const slides = [
 export default function SlidesPage() {
 	const [slideActual, setSlideActual] = useState(0)
 	const [mostrarInteractividad, setMostrarInteractividad] = useState(false)
-	const [codigoSesion] = useState(() => generarCodigoSesion())
 
 	const totalSlides = slides.length
 
