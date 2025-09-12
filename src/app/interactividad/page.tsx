@@ -18,14 +18,15 @@ export default function InteractividadPage() {
 	const [showUserNameModal, setShowUserNameModal] = useState(false)
 	const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
 
-	const { userName, questionsCount, setUserName, submitQuestion, canSubmitQuestion, isLoading } = usePitchQuestions()
+	const { userName, questionsCount, setUserName, submitQuestion, canSubmitQuestion, isLoading, isInitialized } =
+		usePitchQuestions()
 
-	// Mostrar modal si no hay nombre de usuario
+	// Mostrar modal si no hay nombre de usuario y ya se inicializó el hook
 	useEffect(() => {
-		if (!userName) {
+		if (isInitialized && !userName) {
 			setShowUserNameModal(true)
 		}
-	}, [userName])
+	}, [userName, isInitialized])
 
 	const manejarEnviarPregunta = async () => {
 		if (!nuevaPregunta.trim()) return

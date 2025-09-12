@@ -7,6 +7,7 @@ interface UsePitchQuestionsReturn {
 	submitQuestion: (question: string) => Promise<{ success: boolean; error?: string }>
 	canSubmitQuestion: boolean
 	isLoading: boolean
+	isInitialized: boolean
 }
 
 const STORAGE_KEY = 'pitch-user-name'
@@ -16,6 +17,7 @@ export function usePitchQuestions(): UsePitchQuestionsReturn {
 	const [userName, setUserNameState] = useState<string | null>(null)
 	const [questionsCount, setQuestionsCount] = useState<number>(0)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
+	const [isInitialized, setIsInitialized] = useState<boolean>(false)
 
 	// Cargar datos del localStorage al montar el componente
 	useEffect(() => {
@@ -29,6 +31,9 @@ export function usePitchQuestions(): UsePitchQuestionsReturn {
 		if (storedCount) {
 			setQuestionsCount(parseInt(storedCount, 10))
 		}
+
+		// Marcar como inicializado después de verificar localStorage
+		setIsInitialized(true)
 	}, [])
 
 	const setUserName = (name: string) => {
@@ -100,5 +105,6 @@ export function usePitchQuestions(): UsePitchQuestionsReturn {
 		submitQuestion,
 		canSubmitQuestion,
 		isLoading,
+		isInitialized,
 	}
 }
