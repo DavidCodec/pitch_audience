@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@src/lib/supabase'
 
 interface UsePitchQuestionsReturn {
 	userName: string | null
@@ -55,27 +54,25 @@ export function usePitchQuestions(): UsePitchQuestionsReturn {
 		try {
 			console.log('Enviando pregunta:', { name: userName, pregunta: question.trim() })
 
-			const { data, error } = await supabase
-				.from('pitchQuestions')
-				.insert([
-					{
-						name: userName,
-						pregunta: question.trim(),
-					},
-				])
-				.select()
+			const response = await fetch('/api/questions', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					name: userName,
+					pregunta: question.trim(),
+				}),
+			})
 
-			if (error) {
-				console.error('Error detallado al enviar pregunta:', {
-					message: error.message,
-					details: error.details,
-					hint: error.hint,
-					code: error.code,
-				})
-				return { success: false, error: `Error al enviar la pregunta: ${error.message}` }
+			const result = await response.json()
+
+			if (!response.ok) {
+				console.error('Error al enviar pregunta:', result.error)
+				return { success: false, error: result.error || 'Error al enviar la pregunta' }
 			}
 
-			console.log('Pregunta enviada exitosamente:', data)
+			console.log('Pregunta enviada exitosamente:', result.data)
 
 			// Incrementar contador de preguntas
 			const newCount = questionsCount + 1

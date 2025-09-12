@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react'
-import { supabase, PitchQuestion } from '@src/lib/supabase'
+
+export interface PitchQuestion {
+	id?: number
+	name: string
+	pregunta: string
+	created_at?: string
+}
 
 interface UseRealtimeQuestionsReturn {
 	questions: PitchQuestion[]
@@ -15,21 +21,19 @@ export function useRealtimeQuestions(): UseRealtimeQuestionsReturn {
 	const [newQuestionCount, setNewQuestionCount] = useState<number>(0)
 
 	useEffect(() => {
-		// Cargar preguntas existentes
+		// Cargar preguntas existentes desde API route
 		const loadInitialQuestions = async () => {
 			try {
-				const { data, error } = await supabase
-					.from('pitchQuestions')
-					.select('*')
-					.order('created_at', { ascending: false })
+				const response = await fetch('/api/questions')
+				const result = await response.json()
 
-				if (error) {
-					console.error('Error al cargar preguntas:', error)
+				if (!response.ok) {
+					console.error('Error al cargar preguntas:', result.error)
 					setError('Error al cargar las preguntas')
 					return
 				}
 
-				setQuestions(data || [])
+				setQuestions(result.data || [])
 			} catch (err) {
 				console.error('Error inesperado:', err)
 				setError('Error inesperado al cargar las preguntas')
@@ -40,63 +44,61 @@ export function useRealtimeQuestions(): UseRealtimeQuestionsReturn {
 
 		loadInitialQuestions()
 
-		// Suscribirse a cambios en tiempo real
-		const channel = supabase
-			.channel('pitch-questions')
-			.on(
-				'postgres_changes',
-				{
-					event: 'INSERT',
-					schema: 'public',
-					table: 'pitchQuestions',
-				},
-				(payload) => {
-					console.log('Nueva pregunta recibida:', payload.new)
-					const newQuestion = payload.new as PitchQuestion
-					setQuestions((prev) => [newQuestion, ...prev])
-					setNewQuestionCount((prev) => prev + 1)
-				},
-			)
-			.on(
-				'postgres_changes',
-				{
-					event: 'UPDATE',
-					schema: 'public',
-					table: 'pitchQuestions',
-				},
-				(payload) => {
-					console.log('Pregunta actualizada:', payload.new)
-					const updatedQuestion = payload.new as PitchQuestion
-					setQuestions((prev) => prev.map((q) => (q.id === updatedQuestion.id ? updatedQuestion : q)))
-				},
-			)
-			.on(
-				'postgres_changes',
-				{
-					event: 'DELETE',
-					schema: 'public',
-					table: 'pitchQuestions',
-				},
-				(payload) => {
-					console.log('Pregunta eliminada:', payload.old)
-					const deletedQuestion = payload.old as PitchQuestion
-					setQuestions((prev) => prev.filter((q) => q.id !== deletedQuestion.id))
-				},
-			)
-			.subscribe((status) => {
-				console.log('Estado de suscripción:', status)
-				if (status === 'SUBSCRIBED') {
-					console.log('✅ Suscrito a preguntas en tiempo real')
-				} else if (status === 'CHANNEL_ERROR') {
-					console.error('❌ Error en la suscripción')
-					setError('Error de conexión en tiempo real')
+		// Suscribirse a cambios en tiempo real usando Server-Sent Events
+		const eventSource = new EventSource('/api/questions/stream')
+
+		eventSource.onopen = () => {
+			console.log('✅ Conectado a preguntas en tiempo real')
+		}
+
+		eventSource.onmessage = (event) => {
+			try {
+				const data = JSON.parse(event.data)
+
+				switch (data.type) {
+					case 'connected':
+						console.log('✅ Suscrito a preguntas en tiempo real')
+						break
+					case 'new_question':
+						console.log('Nueva pregunta recibida:', data.data)
+						const newQuestion = data.data as PitchQuestion
+						setQuestions((prev) => [newQuestion, ...prev])
+						setNewQuestionCount((prev) => prev + 1)
+						break
+					case 'updated_question':
+						console.log('Pregunta actualizada:', data.data)
+						const updatedQuestion = data.data as PitchQuestion
+						setQuestions((prev) => prev.map((q) => (q.id === updatedQuestion.id ? updatedQuestion : q)))
+						break
+					case 'deleted_question':
+						console.log('Pregunta eliminada:', data.data)
+						const deletedQuestion = data.data as PitchQuestion
+						setQuestions((prev) => prev.filter((q) => q.id !== deletedQuestion.id))
+						break
+					case 'error':
+						console.error('❌ Error en la suscripción:', data.message)
+						setError('Error de conexión en tiempo real')
+						break
+					case 'heartbeat':
+						// Mantener conexión viva
+						break
+					default:
+						console.log('Evento desconocido:', data)
 				}
-			})
+			} catch (err) {
+				console.error('Error al procesar evento:', err)
+			}
+		}
+
+		eventSource.onerror = (error) => {
+			console.error('❌ Error en EventSource:', error)
+			setError('Error de conexión en tiempo real')
+		}
 
 		// Cleanup al desmontar
 		return () => {
 			console.log('Desuscribiéndose de preguntas en tiempo real')
-			supabase.removeChannel(channel)
+			eventSource.close()
 		}
 	}, [])
 
