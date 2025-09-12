@@ -24,8 +24,8 @@ export async function GET(request: NextRequest) {
 				sendData({ type: 'heartbeat', timestamp: Date.now() })
 			}
 
-			// Enviar heartbeat cada 30 segundos
-			const heartbeatInterval = setInterval(sendHeartbeat, 30000)
+			// Enviar heartbeat cada 15 segundos (más frecuente para móviles)
+			const heartbeatInterval = setInterval(sendHeartbeat, 15000)
 
 			// Suscribirse a cambios en tiempo real usando Supabase
 			const channel = supabaseServer

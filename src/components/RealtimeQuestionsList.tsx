@@ -8,7 +8,7 @@ import { MessageSquare, Wifi, WifiOff, Loader2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export function RealtimeQuestionsList() {
-	const { questions, isLoading, error, newQuestionCount } = useRealtimeQuestions()
+	const { questions, isLoading, error, newQuestionCount, reconnect } = useRealtimeQuestions()
 
 	if (isLoading) {
 		return (
@@ -41,7 +41,13 @@ export function RealtimeQuestionsList() {
 					</CardTitle>
 				</CardHeader>
 				<CardContent>
-					<p className="text-red-600 text-sm">{error}</p>
+					<p className="text-red-600 text-sm mb-3">{error}</p>
+					<button
+						onClick={reconnect}
+						className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm"
+					>
+						🔄 Reintentar Conexión
+					</button>
 				</CardContent>
 			</Card>
 		)
