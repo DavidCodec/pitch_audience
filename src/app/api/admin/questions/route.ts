@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseServer } from '@src/lib/supabase-server'
 
 // GET - Obtener todas las preguntas
-export async function GET(request: NextRequest) {
+export async function GET() {
 	try {
 		console.log('Obteniendo todas las preguntas...')
 
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
 }
 
 // DELETE - Eliminar todas las preguntas (para pruebas)
-export async function DELETE(request: NextRequest) {
+export async function DELETE() {
 	try {
 		console.log('Iniciando eliminación de todas las preguntas...')
 

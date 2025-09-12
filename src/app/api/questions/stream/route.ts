@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 	const stream = new ReadableStream({
 		start(controller) {
 			// Función para enviar datos al cliente
-			const sendData = (data: any) => {
+			const sendData = (data: unknown) => {
 				const message = `data: ${JSON.stringify(data)}\n\n`
 				controller.enqueue(new TextEncoder().encode(message))
 			}

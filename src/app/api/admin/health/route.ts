@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseServer } from '@src/lib/supabase-server'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
 	try {
 		console.log('Verificando salud de la conexión a Supabase...')
 
@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
 		}
 
 		// Probar conexión simple
-		const { data, error } = await supabaseServer.from('pitchQuestions').select('count').limit(1)
+		const { error } = await supabaseServer.from('pitchQuestions').select('count').limit(1)
 
 		if (error) {
 			console.error('Error de conexión a Supabase:', error)

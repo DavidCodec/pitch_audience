@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { DeckControls } from '@src/components/DeckControls'
-import { generarCodigoSesion } from '@src/lib/utils'
 import {
 	Portada,
 	Resumen,
