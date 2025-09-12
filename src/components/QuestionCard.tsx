@@ -4,7 +4,7 @@ import { Card, CardContent } from '@src/components/ui/card'
 import { Badge } from '@src/components/ui/badge'
 import { MessageSquare, User, Clock } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { PitchQuestion } from '@src/lib/supabase'
+import { PitchQuestion } from '@src/lib/supabase-server'
 
 interface QuestionCardProps {
 	question: PitchQuestion
