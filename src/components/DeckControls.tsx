@@ -11,8 +11,6 @@ interface DeckControlsProps {
 	slideActual: number
 	totalSlides: number
 	onCambiarSlide: (slide: number) => void
-	onToggleInteractividad: () => void
-	participantes?: number
 }
 
 const secciones = [

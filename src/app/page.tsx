@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Button } from '@src/components/ui/button'
-import { MessageSquare, Presentation } from 'lucide-react'
+import { Presentation } from 'lucide-react'
 
 export default function Home() {
 	return (
@@ -14,17 +14,6 @@ export default function Home() {
 						<Button size="lg" className="w-full sm:w-auto cursor-pointer">
 							<Presentation className="w-5 h-5 mr-2" />
 							Ver Presentación
-						</Button>
-					</Link>
-
-					<Link href="/interactividad">
-						<Button
-							size="lg"
-							variant="outline"
-							className="w-full sm:w-auto bg-white/10 border-white/20 text-white hover:bg-white/20 cursor-pointer"
-						>
-							<MessageSquare className="w-5 h-5 mr-2" />
-							Panel Interactivo
 						</Button>
 					</Link>
 				</div>

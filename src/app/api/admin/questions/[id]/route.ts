@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { supabaseServer } from '@src/lib/supabase-server'
 
 // DELETE - Eliminar una pregunta específica
-export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
 	try {
 		const { id: idParam } = await params
 		const id = parseInt(idParam)

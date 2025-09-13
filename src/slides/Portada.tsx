@@ -15,7 +15,7 @@ export function Portada(props: Props = {}) {
 			<Particles seed={seed} />
 			<div className="flex flex-col items-center justify-center">
 				<h1 className="text-blue-100 text-center font-bold text-6xl font-sans flex items-center justify-center gap-2">
-					<CodeXml className="w-20 h-20 stroke-2" /> Solware
+					<CodeXml className="w-20 h-20 stroke-2" /> Solhub
 				</h1>
 				<p className="text-white/90 text-center text-xl font-semibold">
 					Sistema Administrativo Web para Laboratorios y Clínicas

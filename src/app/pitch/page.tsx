@@ -5,12 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { DeckControls } from '@src/components/DeckControls'
 import {
 	Portada,
-	Resumen,
-	Problema,
+	ResumenProblema,
 	Solucion,
-	Arquitectura,
 	Mercado,
-	Competencia,
 	Negocio,
 	Traccion,
 	Roadmap,
@@ -29,13 +26,7 @@ const slides = [
 	// Slide 2: Resumen Ejecutivo
 	{
 		id: 'resumen',
-		component: Resumen,
-	},
-
-	// Slide 3: Problema
-	{
-		id: 'problema',
-		component: Problema,
+		component: ResumenProblema,
 	},
 
 	// Slide 4: Solución
@@ -44,22 +35,10 @@ const slides = [
 		component: Solucion,
 	},
 
-	// Slide 5: Arquitectura
-	{
-		id: 'arquitectura',
-		component: Arquitectura,
-	},
-
 	// Slide 6: Mercado
 	{
 		id: 'mercado',
 		component: Mercado,
-	},
-
-	// Slide 7: Competencia
-	{
-		id: 'competencia',
-		component: Competencia,
 	},
 
 	// Slide 8: Negocio
@@ -101,7 +80,6 @@ const slides = [
 
 export default function SlidesPage() {
 	const [slideActual, setSlideActual] = useState(0)
-	const [mostrarInteractividad, setMostrarInteractividad] = useState(false)
 
 	const totalSlides = slides.length
 
@@ -111,19 +89,9 @@ export default function SlidesPage() {
 		}
 	}
 
-	const toggleInteractividad = () => {
-		setMostrarInteractividad(!mostrarInteractividad)
-	}
-
 	return (
 		<div className="min-h-screen w-full">
-			<DeckControls
-				slideActual={slideActual}
-				totalSlides={totalSlides}
-				onCambiarSlide={cambiarSlide}
-				onToggleInteractividad={toggleInteractividad}
-				participantes={0}
-			/>
+			<DeckControls slideActual={slideActual} totalSlides={totalSlides} onCambiarSlide={cambiarSlide} />
 
 			<div>
 				<AnimatePresence mode="wait">
