@@ -148,6 +148,9 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden; /* Prevenir scroll horizontal durante transiciones */
+    overflow-y: auto; /* Permitir scroll vertical en móviles */
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height para móviles */
   }
   ::selection {
     @apply bg-primary text-primary-foreground;
@@ -295,7 +298,7 @@
     transform: translateZ(0); /* Force hardware acceleration */
     backface-visibility: hidden;
     perspective: 1000px;
-    overflow: hidden; /* Quitar scroll del contenedor del slide */
+    overflow: visible; /* Permitir que el contenido fluya naturalmente */
   }
 
   .slide-transition-content {
@@ -330,5 +333,22 @@
   .no-flash {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Estilos específicos para móviles - scroll unificado */
+  @media (max-width: 768px) {
+    html, body {
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    }
+    
+    .slide-transition-container {
+      overflow: visible !important;
+      position: relative !important;
+    }
+    
+    .slide-transition-content {
+      overflow: visible !important;
+    }
   }
 }

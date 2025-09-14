@@ -4,7 +4,7 @@ import { AnimatedText, AnimatedCard, AnimatedIcon } from '@src/components/Animat
 
 export function Evolucion3() {
 	return (
-		<div className="bg-gradient-to-br from-indigo-900 to-indigo-950 w-full min-h-screen flex flex-col p-4 sm:p-6 md:p-8 lg:p-10">
+		<div className="bg-gradient-to-br from-indigo-900 to-indigo-950 w-full min-h-screen flex flex-col p-4 sm:p-6 md:p-8 lg:p-10 pb-20 sm:pb-24 md:pb-28 lg:pb-32">
 			<SlideTitle title="La evolución continúa" gradientColor="from-green-400 to-blue-400" />
 
 			{/* Contenido principal - 2x2 grid con cuadros del mismo tamaño */}

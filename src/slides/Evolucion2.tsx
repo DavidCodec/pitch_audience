@@ -57,30 +57,6 @@ export function Evolucion2() {
 					</AnimatedText>
 				</AnimatedCard>
 
-				{/* Resumen final */}
-				<AnimatedText delay={1.4} className="max-w-5xl mx-auto col-span-1 sm:col-span-2 lg:col-span-3">
-					<AnimatedCard
-						delay={1.6}
-						className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20"
-					>
-						<div className="flex flex-col sm:flex-row items-center justify-center mb-3 sm:mb-4">
-							<AnimatedIcon delay={1.8}>
-								<BarChart3 className="w-6 h-6 sm:w-8 sm:h-8 text-white mb-2 sm:mb-0 sm:mr-2" />
-							</AnimatedIcon>
-							<AnimatedText delay={2.0}>
-								<h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white text-center">Módulos Avanzados</h3>
-							</AnimatedText>
-						</div>
-						<AnimatedText delay={2.2}>
-							<p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center leading-relaxed">
-								Añadiremos un <span className="text-blue-400 font-bold">módulo de Business Intelligence</span> con
-								análisis predictivo de ingresos, tipos de exámenes y desempeño por sede o médico. Así, las{' '}
-								<span className="text-green-400 font-bold">decisiones se basarán en datos</span>.
-							</p>
-						</AnimatedText>
-					</AnimatedCard>
-				</AnimatedText>
-
 				{/* Facturación */}
 				<AnimatedCard
 					delay={1.8}
