@@ -41,7 +41,7 @@ export function CTA() {
 										href="https://www.solware.agency"
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-white hover:text-green-300 transition-colors text-sm sm:text-base md:text-lg"
+										className="text-white hover:text-green-300 transition-colors text-base md:text-lg"
 									>
 										solware.agency
 									</a>
@@ -56,7 +56,7 @@ export function CTA() {
 										href="tel:+584129974533"
 										target="_self"
 										rel="noopener noreferrer"
-										className="text-white hover:text-green-300 transition-colors text-sm sm:text-base md:text-lg"
+										className="text-white hover:text-green-300 transition-colors text-base md:text-lg"
 									>
 										+58 412-997-4533
 									</a>
@@ -71,7 +71,7 @@ export function CTA() {
 										href="https://www.instagram.com/solware_"
 										target="_self"
 										rel="noopener noreferrer"
-										className="text-white hover:text-green-300 transition-colors text-sm sm:text-base md:text-lg"
+										className="text-white hover:text-green-300 transition-colors text-base md:text-lg"
 									>
 										@solware_
 									</a>
@@ -86,7 +86,7 @@ export function CTA() {
 										href="https://www.linkedin.com/company/agencia-solware"
 										target="_self"
 										rel="noopener noreferrer"
-										className="text-white hover:text-green-300 transition-colors text-sm sm:text-base md:text-lg"
+										className="text-white hover:text-green-300 transition-colors text-base md:text-lg"
 									>
 										agencia-solware
 									</a>
@@ -99,19 +99,13 @@ export function CTA() {
 									href="https://calendar.app.google/EYruMbWpJwJ82gHr6"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-white hover:bg-purple-600 transition-colors text-sm sm:text-base md:text-lg bg-purple-500 p-2 sm:p-3 px-3 sm:px-4 md:px-6 rounded-md"
+									className="text-white hover:bg-purple-600 transition-colors text-base md:text-lg bg-purple-500 p-2 sm:p-3 px-3 sm:px-4 md:px-6 rounded-md"
 								>
 									Agendar Cita
 								</a>
 							</div>
 						</AnimatedText>
 					</AnimatedCard>
-				</AnimatedText>
-
-				<AnimatedText delay={2.0}>
-					<div className="mt-8 sm:mt-12 text-base sm:text-lg md:text-xl lg:text-2xl italic">
-						Juntos podemos modernizar la gestión de laboratorios en Venezuela
-					</div>
 				</AnimatedText>
 			</div>
 		</div>

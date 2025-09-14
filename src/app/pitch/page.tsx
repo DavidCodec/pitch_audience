@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { DeckControls } from '@src/components/DeckControls'
 import { FadeTransition } from '@src/components/SlideTransition'
 import { useSlideAnimations } from '@src/hooks/useSlideAnimations'
+import { useMobileScroll } from '@src/hooks/useMobileScroll'
 import {
 	Portada,
 	// Resumen,
@@ -11,10 +12,7 @@ import {
 	Dolencia1,
 	Dolencia2,
 	Actividades1,
-	Actividades2,
-	SolHub1,
-	SolHub2,
-	SolHub3,
+	VideoPanel,
 	Evolucion1,
 	Evolucion2,
 	Evolucion3,
@@ -56,26 +54,8 @@ const slides = [
 
 	// Slide 5: Actividades 2
 	{
-		id: 'actividades2',
-		component: Actividades2,
-	},
-
-	// Slide 6: SolHub 1
-	{
-		id: 'solhub1',
-		component: SolHub1,
-	},
-
-	// Slide 7: SolHub 2
-	{
-		id: 'solhub2',
-		component: SolHub2,
-	},
-
-	// Slide 8: SolHub 3
-	{
-		id: 'solhub3',
-		component: SolHub3,
+		id: 'videopanel',
+		component: VideoPanel,
 	},
 
 	// Slide 9: Evolucion 1
@@ -163,6 +143,9 @@ export default function SlidesPage() {
 	const totalSlides = slides.length
 	const { getTransitionDirection } = useSlideAnimations()
 
+	// Configurar scroll para móviles
+	useMobileScroll()
+
 	const cambiarSlide = (nuevoSlide: number) => {
 		if (nuevoSlide >= 0 && nuevoSlide < totalSlides) {
 			// Actualizar slide inmediatamente para transición fluida
@@ -238,7 +221,7 @@ export default function SlidesPage() {
 	const direction = getTransitionDirection(previousSlideRef.current, slideActual)
 
 	return (
-		<div className="w-full min-h-screen overflow-x-hidden">
+		<div className="w-full overflow-x-hidden">
 			<DeckControls
 				slideActual={slideActual}
 				totalSlides={totalSlides}
@@ -248,13 +231,13 @@ export default function SlidesPage() {
 			/>
 
 			<div
-				className="w-full min-h-screen relative cursor-pointer overflow-hidden"
+				className="w-full relative cursor-pointer"
 				onClick={handleSlideClick}
 				onTouchStart={handleTouchStart}
 				onTouchEnd={handleTouchEnd}
 			>
-				<FadeTransition slideIndex={slideActual} direction={direction} className="w-full min-h-full">
-					{slides[slideActual].component()}
+				<FadeTransition slideIndex={slideActual} direction={direction} className="w-full">
+					{React.createElement(slides[slideActual].component)}
 				</FadeTransition>
 			</div>
 		</div>

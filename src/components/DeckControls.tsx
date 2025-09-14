@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@src/components/ui/button'
 import { Progress } from '@src/components/ui/progress'
-import { ChevronLeft, ChevronRight, Home, Maximize, Minimize, Menu } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Home, Maximize, Minimize } from 'lucide-react'
 import { cn } from '@src/lib/utils'
 
 interface DeckControlsProps {
@@ -73,44 +73,41 @@ export function DeckControls({ slideActual, totalSlides, onCambiarSlide }: DeckC
 		<>
 			{/* Contenedor con hover para mostrar barra superior */}
 			<Progress value={progreso} className="h-1 rounded-none" />
-			<div className="top-0 left-0 right-0 z-40 group">
+			<div className="relative z-40 group">
 				{/* Barra de progreso superior - aparece con hover */}
-				<div className="top-0 left-0 right-0 z-[9999999999999999] bg-background backdrop-blur-sm border-b">
+				<div className="relative z-[9999999999999999] bg-background backdrop-blur-sm border-b">
 					<div className="flex items-center justify-between px-4 py-2">
 						<div className="flex items-center space-x-4">
 							<span className="hidden lg:block text-sm font-medium">
 								{slideActual + 1} / {totalSlides}
 							</span>
-							<Button variant="ghost" size="sm" onClick={() => setMostrarMiniMapa(!mostrarMiniMapa)}>
-								<Menu className="w-4 h-4" />
-							</Button>
-								<div className="flex lg:hidden items-center space-x-2 bg-card p-2">
-									<Button variant="ghost" size="sm" onClick={() => onCambiarSlide(0)} disabled={slideActual === 0}>
-										<Home className="w-4 h-4" />
-									</Button>
+							<div className="flex lg:hidden items-center space-x-2 bg-card p-2">
+								<Button variant="ghost" size="sm" onClick={() => onCambiarSlide(0)} disabled={slideActual === 0}>
+									<Home className="w-4 h-4" />
+								</Button>
 
-									<Button
-										variant="ghost"
-										size="sm"
-										onClick={() => onCambiarSlide(slideActual - 1)}
-										disabled={slideActual === 0}
-									>
-										<ChevronLeft className="w-4 h-4" />
-									</Button>
+								<Button
+									variant="ghost"
+									size="sm"
+									onClick={() => onCambiarSlide(slideActual - 1)}
+									disabled={slideActual === 0}
+								>
+									<ChevronLeft className="w-4 h-4" />
+								</Button>
 
-									<span className="px-4 py-2 text-sm font-medium min-w-[80px] text-center">
-										{slideActual + 1} / {totalSlides}
-									</span>
+								<span className="px-4 py-2 text-sm font-medium min-w-[80px] text-center">
+									{slideActual + 1} / {totalSlides}
+								</span>
 
-									<Button
-										variant="ghost"
-										size="sm"
-										onClick={() => onCambiarSlide(slideActual + 1)}
-										disabled={slideActual === totalSlides - 1}
-									>
-										<ChevronRight className="w-4 h-4" />
-									</Button>
-								</div>
+								<Button
+									variant="ghost"
+									size="sm"
+									onClick={() => onCambiarSlide(slideActual + 1)}
+									disabled={slideActual === totalSlides - 1}
+								>
+									<ChevronRight className="w-4 h-4" />
+								</Button>
+							</div>
 						</div>
 
 						<div className="flex items-center space-x-2">

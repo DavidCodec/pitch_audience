@@ -61,9 +61,11 @@ export function SlideTransition({ children, slideIndex, direction, className }: 
 				className={`absolute inset-0 slide-transition-container gpu-accelerated no-flash ${className || ''}`}
 				style={{
 					willChange: 'transform, opacity',
+					overflowY: 'auto', // Permitir scroll vertical
+					WebkitOverflowScrolling: 'touch', // Scroll suave en iOS
 				}}
 			>
-				<div className="slide-transition-content w-full min-h-full">{children}</div>
+				<div className="slide-transition-content w-full">{children}</div>
 			</motion.div>
 		</AnimatePresence>
 	)
@@ -113,7 +115,7 @@ export function SmoothSlideTransition({ children, slideIndex, direction, classNa
 					willChange: 'transform, opacity',
 				}}
 			>
-				<div className="slide-transition-content w-full min-h-full">{children}</div>
+				<div className="slide-transition-content w-full">{children}</div>
 			</motion.div>
 		</AnimatePresence>
 	)
@@ -164,7 +166,7 @@ export function VerticalSlideTransition({ children, slideIndex, direction, class
 					willChange: 'transform, opacity',
 				}}
 			>
-				<div className="slide-transition-content w-full min-h-full">{children}</div>
+				<div className="slide-transition-content w-full">{children}</div>
 			</motion.div>
 		</AnimatePresence>
 	)
@@ -208,12 +210,12 @@ export function FadeTransition({ children, slideIndex, direction, className }: S
 				animate="center"
 				exit="exit"
 				transition={fadeTransition}
-				className={`absolute inset-0 slide-transition-container gpu-accelerated no-flash ${className || ''}`}
+				className={`relative slide-transition-container gpu-accelerated no-flash ${className || ''}`}
 				style={{
 					willChange: 'transform, opacity',
 				}}
 			>
-				<div className="slide-transition-content w-full min-h-full">{children}</div>
+				<div className="slide-transition-content w-full">{children}</div>
 			</motion.div>
 		</AnimatePresence>
 	)
