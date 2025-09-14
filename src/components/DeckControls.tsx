@@ -9,7 +9,6 @@ import { cn } from '@src/lib/utils'
 interface DeckControlsProps {
 	slideActual: number
 	totalSlides: number
-	// eslint-disable-next-line no-unused-vars
 	onCambiarSlide: (slide: number) => void
 	onToggleInteractividad: () => void
 	participantes?: number
